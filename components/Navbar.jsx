@@ -2,10 +2,13 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { UserContext } from "./hooks/UserContext";
+import React from "react";
 
 const Sidebar = () => {
   const pathName = usePathname();
-  console.log("🚀 ~ Sidebar ~ pathName:", )
+
+  const { user } = React.useContext(UserContext);
 
   return (
     <header className="py-4 bg-white px-[50px] divide-y-2 divide-E0">
@@ -32,16 +35,21 @@ const Sidebar = () => {
 
           <div className="">
             <h6 className="font-medium font-inter tracking-[0.2px] leading-[28px] text-4F">
-              Paysure User
+              {user?.fullName}
             </h6>
             <p className="text-sm font-inter tracking-[0.2px] leading-[28px] text-4F">
-              Super Admin
+              {user?.roleId}
             </p>
           </div>
         </div>
       </div>
       <h6 className="font-medium font-inter text-[24px] tracking-[0.2px] leading-[28px] text-82 pt-[49px] mt-2.5">
-      {pathName === '/' ? 'Dashboard' : pathName.replace(/^\/(.*)/, (match, p1) => p1.charAt(0).toUpperCase() + p1.slice(1))}
+        {pathName === "/"
+          ? "Dashboard"
+          : pathName.replace(
+              /^\/(.*)/,
+              (match, p1) => p1.charAt(0).toUpperCase() + p1.slice(1)
+            )}
       </h6>
     </header>
   );

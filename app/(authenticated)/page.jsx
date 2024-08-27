@@ -1,96 +1,69 @@
+"use client";
+
 import AnalyticCard from "@/components/AnalyticCard";
+import useCheckAuth from "@/components/hooks/useCheckAuth";
 import { RowAmount, RowName, RowStatus } from "@/components/RowFields";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
 import ViewAllButton from "@/components/table/ViewAllButton";
+import moment from "moment";
 
 export default function Page() {
+  const { data: dataStats } = useCheckAuth(`/api/transactions/getTransMetric`);
+
+  const { data: dataStatsAccount } = useCheckAuth(`/api/accounts/getStats`);
+
+  const { data, isValidating } = useCheckAuth(
+    `/api/transactions/getTransactions`
+  );
+
+  const rows = data?.data.map((item) => {
+    return {
+      name: (
+        <RowName
+          label={item?.beneficiaryAccountNumber}
+          naration={item?.transactionType?.toLowerCase()}
+        />
+      ),
+      acctNumber: item?.originatorAccountNumber,
+      amount: (
+        <RowAmount
+          label={`${
+            item?.transactionType?.toLowerCase() === "credit" ? "+" : "-"
+          }₦ ${item?.amount}`}
+          date={`${moment(item?.transactionDate).format(
+            "DD MMMM, YYYY"
+          )} | ${moment(item?.transactionDate).format("hh:mm A")}`}
+        />
+      ),
+      status: <RowStatus label={item?.status} />,
+      action: "",
+    };
+  });
+
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Total Inflow" value={0} />
-        <AnalyticCard label="Total Outflow" value={0} />
-        <AnalyticCard label="Total Accounts" value={0} />
+        <AnalyticCard
+          label="Total Inflow"
+          value={dataStats?.INBOUND?.[0]?.categoryValue || 0}
+        />
+        <AnalyticCard
+          label="Total Outflow"
+          value={dataStats?.OUTBOUND?.[0]?.categoryValue || 0}
+        />
+        <AnalyticCard
+          label="Total Accounts"
+          value={dataStatsAccount?.["Total User"] || 0}
+        />
         <AnalyticCard label="Total Card Holders" value={0} />
         <AnalyticCard label="Disbursed Loans" value={0} />
       </div>
 
       <Table
         columns={["Name", "Account Number", "Amount", "Status", "Invoice"]}
-        rows={[
-          {
-            name: <RowName label="Odesola Ibrahim" naration={"Debited"} />,
-            acctNumber: "28377446362",
-            amount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            status: <RowStatus label="Completed" />,
-            invoices: "",
-          },
-          {
-            name: <RowName label="Odesola Ibrahim" naration={"Debited"} />,
-            acctNumber: "28377446362",
-            amount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            status: <RowStatus label="Completed" />,
-            invoices: "",
-          },
-          {
-            name: <RowName label="Odesola Ibrahim" naration={"Debited"} />,
-            acctNumber: "28377446362",
-            amount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            status: <RowStatus label="Completed" />,
-            invoices: "",
-          },
-          {
-            name: <RowName label="Odesola Ibrahim" naration={"Debited"} />,
-            acctNumber: "28377446362",
-            amount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            status: <RowStatus label="Completed" />,
-            invoices: "",
-          },
-          {
-            name: <RowName label="Odesola Ibrahim" naration={"Debited"} />,
-            acctNumber: "28377446362",
-            amount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            status: <RowStatus label="Completed" />,
-            invoices: "",
-          },
-          {
-            name: <RowName label="Odesola Ibrahim" naration={"Debited"} />,
-            acctNumber: "28377446362",
-            amount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            status: <RowStatus label="Completed" />,
-            invoices: "",
-          },
-        ]}
+        rows={rows || []}
+        isValidating={isValidating}
         toolbar={
           <div className="between">
             <h6 className="font-medium text-black font-inter leading-[28px] tracking-[0.2px]">
@@ -99,7 +72,7 @@ export default function Page() {
 
             <div className="space-x-10 end">
               <SearchInput />
-              <ViewAllButton />
+              {/* <ViewAllButton /> */}
             </div>
           </div>
         }
