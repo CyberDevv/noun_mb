@@ -18,7 +18,7 @@ const TableComp = ({ columns, rows, toolbar, isValidating }) => {
         {rows.length === 0 && isValidating ? (
           <Skeleton className="w-full h-40 bg-green-50" />
         ) : (
-          <Table className="relative w-max">
+          <Table className="relative w-full min-w-max">
             <TableHeader>
               <TableRow className="bg-[#F2F2F2] h-[52px] border-y border-[#E0E0E0]">
                 {columns.map((col, idx) => {
