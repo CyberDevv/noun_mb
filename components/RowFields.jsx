@@ -43,7 +43,7 @@ export const RowDate = ({ time, date }) => (
 export const RowStatusType2 = ({ label }) => (
   <div>
     <p className={`${label === "ENABLED" ? "text-00G border-[#0FB48559]" : "text-[#D32F2F] border-[#D32F2F59]"} font-medium leading-[20px] border capitalize rounded-full w-fit px-2 py-1 start space-x-1 mx-auto`}>
-      <span>{label.toLowerCase()}</span>
+      <span>{label?.toLowerCase()}</span>
     </p>
   </div>
 );

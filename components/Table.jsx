@@ -25,7 +25,7 @@ const TableComp = ({ columns, rows, toolbar, isValidating }) => {
                   return (
                     <TableHead
                       className={`${
-                        col.toLowerCase() === "status" ? "text-center" : ""
+                        col?.toLowerCase() === "status" ? "text-center" : ""
                       }`}
                       key={idx}
                     >
@@ -37,7 +37,7 @@ const TableComp = ({ columns, rows, toolbar, isValidating }) => {
             </TableHeader>
             {rows.length === 0 ? (
               <div className="h-20">
-                <p className="text-center w-full absolute top-24 text-gray-500">
+                <p className="absolute w-full text-center text-gray-500 top-24">
                   No data to display
                 </p>
               </div>

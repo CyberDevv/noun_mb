@@ -11,16 +11,16 @@ const Sidebar = () => {
   const NavItem = ({ label, link }) => {
     return (
       <li>
-        <Link href={label === "Dashboard" ? "/" : `/${link || label.toLowerCase()}`}>
+        <Link href={label === "Dashboard" ? "/" : `/${link || label?.toLowerCase()}`}>
           <Button
             className={`h-auto w-full space-x-4 hover:no-underline font-inter text-sm leading-[18px] rounded-xl tracking-[0.2px] text-82 start py-4 px-5 ${
-              pathName === `/${link || label.toLowerCase()}` ? "bg-E6F text-00" : ""
+              pathName === `/${link || label?.toLowerCase()}` ? "bg-E6F text-00" : ""
             }`}
             variant="ghost"
           >
             <Image
-              src={`/svg/${link || label.toLowerCase()}${
-                `/${link || label.toLowerCase()}` === pathName ? "-active" : ""
+              src={`/svg/${link || label?.toLowerCase()}${
+                `/${link || label?.toLowerCase()}` === pathName ? "-active" : ""
               }${
                 pathName === "/" && label === "Dashboard" ? "-active" : ""
               }.png`}
