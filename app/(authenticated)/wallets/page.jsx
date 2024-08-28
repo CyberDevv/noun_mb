@@ -64,7 +64,7 @@ const Investment = () => {
         toolbar={
           <div className="between">
             <h6 className="font-medium text-black font-inter leading-[28px] tracking-[0.2px]">
-              History History
+              Wallet History
             </h6>
 
             <div className="space-x-10 end">
