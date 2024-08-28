@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
           <nav className="between">
             <div className="p-2 bg-white rounded-2xl">
               <Image
-                src="/images/Logo.png"
+                src="/images/logo.png"
                 width={65}
                 height={65}
                 alt="logo"
@@ -78,7 +78,7 @@ const Layout = ({ children }) => {
             <div className=" col-center">
               <div className="p-2 bg-white rounded-2xl">
                 <Image
-                  src="/images/Logo.png"
+                  src="/images/logo.png"
                   width={98}
                   height={98}
                   alt="logo"
