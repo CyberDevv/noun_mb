@@ -19,9 +19,15 @@ const Layout = ({ children }) => {
         <div className="container_fluid">
           {/* Nav */}
           <nav className="between">
-          <div className="p-2 bg-white rounded-2xl">
-                <Image src="/images/Logo.png" width={65} height={65} alt="logo" className="object-contain" />
-              </div>
+            <div className="p-2 bg-white rounded-2xl">
+              <Image
+                src="/images/Logo.png"
+                width={65}
+                height={65}
+                alt="logo"
+                className="object-contain"
+              />
+            </div>
 
             <DropdownMenu open={open} onOpenChange={setOpen}>
               <DropdownMenuTrigger asChild>
@@ -57,7 +63,7 @@ const Layout = ({ children }) => {
                   <Image
                     src="/svg/user.svg"
                     className="mr-2.5 text-4f text-sm leading-[16px] font-inter tracking-[0.2px]"
-                  width={24}
+                    width={24}
                     height={24}
                     alt="change"
                   />
@@ -71,13 +77,22 @@ const Layout = ({ children }) => {
           <div className="h-[calc(100vh-135px)] col-center">
             <div className=" col-center">
               <div className="p-2 bg-white rounded-2xl">
-                <Image src="/images/Logo.png" width={98} height={98} alt="logo" className="object-contain" />
+                <Image
+                  src="/images/Logo.png"
+                  width={98}
+                  height={98}
+                  alt="logo"
+                  className="object-contain"
+                />
               </div>
-              
+
               <div className="mt-8 bg-01 w-[452px] rounded-[20px] p-[30px]">
                 {children}
               </div>
-              <Button className="self-end mt-6 text-E6 font-inter tracking-[0.2px] leading-[18px]" variant="link">
+              <Button
+                className="self-end mt-6 text-E6 font-inter tracking-[0.2px] leading-[18px]"
+                variant="link"
+              >
                 Lost Password?
               </Button>
             </div>
