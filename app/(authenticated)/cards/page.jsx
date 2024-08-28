@@ -1,18 +1,23 @@
-import React from 'react'
+import AnalyticCard from "@/components/AnalyticCard";
+import { RowDate, RowName, RowStatusType2 } from "@/components/RowFields";
+import Table from "@/components/Table";
+import SearchInput from "@/components/table/SearchInput";
 
-const page = () => {
+const Cards = () => {
   return (
-    <div>page</div>
-  )
-}
+    <main className="space-y-[18px]">
+      {" "}
+      <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
+        <AnalyticCard label="Total No. of Cards" value={0} />
+        <AnalyticCard label="Total Active Cards" value={0} />
+        <AnalyticCard label="Total Inactive Cards" value={0} />
+        <AnalyticCard label="Blocked Cards" value={0} />
+      </div>
+    </main>
+  );
+};
 
-export default page
-
-// import AnalyticCard from "@/components/AnalyticCard";
-// import { RowDate, RowName, RowStatusType2 } from "@/components/RowFields";
-// import Table from "@/components/Table";
-// import SearchInput from "@/components/table/SearchInput";
-
+export default Cards;
 
 // const Cards = () => {
 //   return (
