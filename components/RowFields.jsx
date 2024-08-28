@@ -15,7 +15,7 @@ export const RowName = ({ label, naration }) => (
     <div className="h-[35px] w-[35px] rounded-full bg-gray-500" />
     <div>
       <p className="">{label}</p>
-      <p className="text-F7 capitalize text-[10px] leading-[14px] tracking-[0.3px] font-inter mt-0.5">
+      <p className={`${naration.toLowerCase() === "debit" ? "text-F7" : "text-00G"} capitalize text-[10px] leading-[14px] tracking-[0.3px] font-inter mt-0.5`}>
         {naration}
       </p>
     </div>
