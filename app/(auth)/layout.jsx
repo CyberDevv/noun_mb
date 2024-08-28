@@ -93,7 +93,7 @@ const Layout = ({ children }) => {
                 className="self-end mt-6 text-E6 font-inter tracking-[0.2px] leading-[18px]"
                 variant="link"
               >
-                Lost Password?
+                Forgot Password?
               </Button>
             </div>
           </div>
