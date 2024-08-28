@@ -33,7 +33,7 @@ const Account = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Total Accounts" value={dataStats?.["Total User"] || 0} hasBase />
+        <AnalyticCard label="Total Accounts" value={dataStats?.["Total User"] || 0} />
         <AnalyticCard label="Verified Accounts" value={dataStats?.["Verified Accounts"] || 0} />
         <AnalyticCard label="Unverified Accounts" value={dataStats?.["Unverified Accounts"] || 0} />
         <AnalyticCard label="Disabled Users" value={dataStats?.["Disabled Users"] || 0} />

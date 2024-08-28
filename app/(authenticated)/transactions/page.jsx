@@ -45,7 +45,7 @@ const Account = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Daily Transactions" value={0} hasBase />
+        <AnalyticCard label="Daily Transactions" value={0} />
         <AnalyticCard label="Weekly Transactions" value={0} />
         <AnalyticCard label="Monthly Transactions" value={0} />
       </div>

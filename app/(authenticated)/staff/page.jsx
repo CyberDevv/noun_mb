@@ -26,7 +26,7 @@ const Staff = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Total Staff" value={0} hasBase />
+        <AnalyticCard label="Total Staff" value={0} />
         <AnalyticCard label="Total Active" value={0} />
        <AnalyticCard label="Total Inactive" value={0} />
       </div>

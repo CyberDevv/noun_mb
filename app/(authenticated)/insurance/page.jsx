@@ -10,7 +10,7 @@ const Insurance = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Total No. of Policies Holder" value={0} hasBase />
+        <AnalyticCard label="Total No. of Policies Holder" value={0} />
         <AnalyticCard label="Total Active" value={0} />
         <AnalyticCard label="Total Inactive" value={0} />
         <AnalyticCard label="Claims Pending" value={0} />

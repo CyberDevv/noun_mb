@@ -16,7 +16,7 @@ const Savings = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Total No. of Accounts" value={0} hasBase />
+        <AnalyticCard label="Total No. of Accounts" value={0} />
         <AnalyticCard label="Total Savings Balance" value={0} />
         <AnalyticCard label="Average Account Balance" value={0} />
         <AnalyticCard label="Active Accounts" value={0} />

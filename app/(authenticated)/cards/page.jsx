@@ -11,7 +11,7 @@ const Cards = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Total No. of Cards" value={0} hasBase />
+        <AnalyticCard label="Total No. of Cards" value={0} />
         <AnalyticCard label="Total Active Cards" value={0} />
         <AnalyticCard label="Total Inactive Cards" value={0} />
         <AnalyticCard label="Blocked Cards" value={0} />

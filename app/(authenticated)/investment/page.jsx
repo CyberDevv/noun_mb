@@ -11,7 +11,7 @@ const Investment = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Total No. of Holders" value={0} hasBase />
+        <AnalyticCard label="Total No. of Holders" value={0} />
         <AnalyticCard label="Total Active" value={0} />
         <AnalyticCard label="Total Matured" value={0} />
          <AnalyticCard label="Terminated" value={0} />
