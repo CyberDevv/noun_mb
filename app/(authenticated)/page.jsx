@@ -21,11 +21,11 @@ export default function Page() {
     return {
       name: (
         <RowName
-          label={item?.beneficiaryAccountNumber}
+          label={item?.beneficiaryAccountName}
           naration={item?.transactionType?.toLowerCase()}
         />
       ),
-      acctNumber: item?.originatorAccountNumber,
+      acctNumber: item?.beneficiaryAccountNumber,
       amount: (
         <RowAmount
           label={`${

@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
         <div className="container_fluid">
           {/* Nav */}
           <nav className="between">
-            <Image src="/svg/Logo.svg" width={73} height={34} alt="logo" />
+            <Image src="/svg/Logo.svg" width={73} height={73} alt="logo" />
 
             <DropdownMenu open={open} onOpenChange={setOpen}>
               <DropdownMenuTrigger asChild>
@@ -66,9 +66,9 @@ const Layout = ({ children }) => {
           </nav>
 
           {/* content */}
-          <div className="h-[calc(100vh-82px)] col-center">
+          <div className="h-[calc(100vh-116px)] col-center">
             <div className=" col-center">
-              <Image src="/svg/Logo.svg" width={98} height={54} alt="logo" />
+              <Image src="/svg/Logo.svg" width={98} height={98} alt="logo" />
               
               <div className="mt-8 bg-01 w-[452px] rounded-[20px] p-[30px]">
                 {children}

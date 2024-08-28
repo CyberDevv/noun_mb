@@ -37,9 +37,9 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="h-screen bg-white border-r-2 border-f2">
+    <aside className="fixed w-full h-screen bg-white border-r-2 border-f2 max-w-[240px]">
       <Image
-        src="/images/logo.png"
+        src="/svg/Logo.svg"
         width={73}
         height={73}
         alt="logo"
