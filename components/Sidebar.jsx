@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
+import { destroyCookie } from "nookies";
 
 const Sidebar = () => {
   const pathName = usePathname();
@@ -11,10 +12,16 @@ const Sidebar = () => {
   const NavItem = ({ label, link }) => {
     return (
       <li>
-        <Link href={label === "Dashboard" ? "/" : `/${link || label?.toLowerCase()}`}>
+        <Link
+          href={
+            label === "Dashboard" ? "/" : `/${link || label?.toLowerCase()}`
+          }
+        >
           <Button
             className={`h-auto w-full space-x-4 hover:no-underline font-inter text-sm leading-[18px] rounded-xl tracking-[0.2px] text-82 start py-4 px-5 ${
-              pathName === `/${link || label?.toLowerCase()}` ? "bg-E6F text-00" : ""
+              pathName === `/${link || label?.toLowerCase()}`
+                ? "bg-E6F text-00"
+                : ""
             }`}
             variant="ghost"
           >
@@ -26,7 +33,8 @@ const Sidebar = () => {
               }.png`}
               width={18}
               height={18}
-              alt={label}i
+              alt={label}
+              i
               className="object-none"
             />
             <span>{label}</span>
@@ -40,10 +48,10 @@ const Sidebar = () => {
     <aside className="fixed w-full h-screen bg-white border-r-2 border-f2 max-w-[240px]">
       <Image
         src="/images/logo.png"
-        width={90}
-        height={90}
+        width={519}
+        height={519}
         alt="logo"
-        className="object-contain mx-auto my-12"
+        className="object-contain w-32 mx-auto my-12"
       />
 
       <ul className="px-2.5">
@@ -58,6 +66,17 @@ const Sidebar = () => {
         <NavItem label="Investment" />
         <NavItem label="Staff" />
         <NavItem label="Settings" />
+
+        <li className="mt-20">
+          <Link href="/login">
+            <Button
+              className="w-full text-sm text-white bg-red-700 hover:bg-red-800"
+              onClick={() => destroyCookie(null, "_token")}
+            >
+              Logout
+            </Button>
+          </Link>
+        </li>
       </ul>
     </aside>
   );

@@ -43,14 +43,22 @@ export default function Page() {
 
   return (
     <main className="space-y-[18px]">
-      <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
+      <div className="p-12 text-white bg-00 rounded-[15px]">
+        <p>Welcome to </p>
+
+        <h4 className="mt-4 text-3xl font-bold tracking-wider">Noun Micro Finance Bank Limited</h4>
+      </div>
+      
+      <div className="overflow-hidden divide-x-2 grid grid-cols-5 divide-E0 rounded-[15px]">
         <AnalyticCard
           label="Total Inflow"
           value={dataStats?.INBOUND?.[0]?.categoryValue || 0}
+          amount={dataStats?.INBOUND[1]?.categoryValue || 0}
         />
         <AnalyticCard
           label="Total Outflow"
           value={dataStats?.OUTBOUND?.[0]?.categoryValue || 0}
+          amount={dataStats?.OUTBOUND[1]?.categoryValue || 0}
         />
         <AnalyticCard
           label="Total Accounts"

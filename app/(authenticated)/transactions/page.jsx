@@ -17,6 +17,16 @@ const Account = () => {
 
   const { data: dataStats } = useCheckAuth(`/api/transactions/getTransMetric`);
 
+  const dailyKey = Object?.keys(dataStats || []).find((key) =>
+    key.startsWith("DAILY")
+  );
+  const weeklyKey = Object?.keys(dataStats || []).find((key) =>
+    key.startsWith("WEEKLY")
+  );
+  const monthlyKey = Object?.keys(dataStats || []).find((key) =>
+    key.startsWith("MONTHLY")
+  );
+
   const rows = data?.data.map((item) => {
     return {
       transId: item?.recId,
@@ -45,9 +55,21 @@ const Account = () => {
   return (
     <main className="space-y-[18px]">
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
-        <AnalyticCard label="Daily Transactions" value={0} />
-        <AnalyticCard label="Weekly Transactions" value={0} />
-        <AnalyticCard label="Monthly Transactions" value={0} />
+        <AnalyticCard
+          label="Daily Transactions"
+          value={dataStats?.[dailyKey]?.[0]?.categoryValue || 0}
+          amount={dataStats?.[dailyKey]?.[1]?.categoryValue || 0}
+        />
+        <AnalyticCard
+          label="Weekly Transactions"
+          value={dataStats?.[weeklyKey]?.[0]?.categoryValue || 0}
+          amount={dataStats?.[weeklyKey]?.[1]?.categoryValue || 0}
+        />
+        <AnalyticCard
+          label="Monthly Transactions"
+          value={dataStats?.[monthlyKey]?.[0]?.categoryValue || 0}
+          amount={dataStats?.[monthlyKey]?.[1]?.categoryValue || 0}
+        />
       </div>
 
       <Table
@@ -81,5 +103,4 @@ const Account = () => {
     </main>
   );
 };
-
 export default Account;

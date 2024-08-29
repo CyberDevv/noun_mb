@@ -2,7 +2,14 @@ import Image from "next/image";
 import React from "react";
 // import CurrencyFormat from "react-currency-format";
 
-const AnalyticCard = ({ label, value, hasBase, valueIsCurrency, setValue }) => {
+const AnalyticCard = ({
+  label,
+  value,
+  hasBase,
+  valueIsCurrency,
+  setValue,
+  amount,
+}) => {
   const ChildComp = () => {
     return (
       <div
@@ -22,19 +29,22 @@ const AnalyticCard = ({ label, value, hasBase, valueIsCurrency, setValue }) => {
         <p className="mt-[22px] text-9E font-inter font-medium text-sm leading-[22px] tracking-[0.2px]">
           {label}
         </p>
-        <p className="text-33 font-inter font-medium text-[24px] leading-[28px]">
-          {valueIsCurrency
-            ? // <CurrencyFormat
-              //   value={value || 0}
-              //   displayType={"text"}
-              //   thousandSeparator={true}
-              //   prefix={"₦"}
-              //   decimalScale={2}
-              //   fixedDecimalScale
-              // />
-              `₦${value}`
-            : value}
-        </p>
+
+        {amount ? (
+          <>
+            <p className="text-33 font-inter font-medium text-[24px] leading-[28px] mt-4">
+              {`₦${amount}`}
+            </p>
+
+            <p className="font-inter font-medium text-lg leading-[28px] mt-2 text-gray-600">
+              {valueIsCurrency ? `₦${value}` : value}
+            </p>
+          </>
+        ) : (
+          <p className="text-33 font-inter font-medium text-[24px] leading-[28px]  mt-4">
+            {valueIsCurrency ? `₦${value}` : value}
+          </p>
+        )}
       </div>
     );
   };

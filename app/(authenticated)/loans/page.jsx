@@ -21,8 +21,7 @@ const Account = () => {
                     <AnalyticCard
                       label="Total Applications"
                       value={0}
-                      hasBase
-                    />
+                      />
                     <AnalyticCard label="Approved Loans" value={0} />
                     <AnalyticCard label="Pending Applications" value={0} />
                     <AnalyticCard label="Declined Applications" value={0} />
@@ -75,8 +74,7 @@ const Account = () => {
                     <AnalyticCard
                       label="Total Applications"
                       value={0}
-                      hasBase
-                    />
+                      />
                     <AnalyticCard label="Approved Loans" value={0} />
                     <AnalyticCard label="Pending Applications" value={0} />
                     <AnalyticCard label="Declined Applications" value={0} />
@@ -129,8 +127,7 @@ const Account = () => {
                     <AnalyticCard
                       label="Total Applications"
                       value={0}
-                      hasBase
-                    />
+                      />
                     <AnalyticCard label="Approved Loans" value={0} />
                     <AnalyticCard label="Pending Applications" value={0} />
                     <AnalyticCard label="Declined Applications" value={0} />
