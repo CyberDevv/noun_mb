@@ -43,6 +43,13 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
+      {pathName === "/" && <div className="p-12 text-white bg-00 rounded-[15px]">
+        <p>Welcome to </p>
+
+        <h4 className="mt-4 text-3xl font-bold tracking-wider">
+        National Open University of Nigeria <br /> Micro Finance Bank Limited
+        </h4>
+      </div>}
       <h6 className="font-medium font-inter text-[24px] tracking-[0.2px] leading-[28px] text-82 pt-[49px] mt-2.5">
         {pathName === "/"
           ? "Dashboard"

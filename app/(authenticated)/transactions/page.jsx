@@ -27,7 +27,7 @@ const Account = () => {
     key.startsWith("MONTHLY")
   );
 
-  const rows = data?.data.map((item) => {
+  const rows = data?.data?.map((item) => {
     return {
       transId: item?.recId,
       acctNumber: item?.originatorAccountNumber,

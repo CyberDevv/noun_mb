@@ -18,7 +18,7 @@ const Account = () => {
   const { data, isValidating } = useCheckAuth(`/api/accounts/getAccounts`);
   const { data: dataStats } = useCheckAuth(`/api/accounts/getStats`);
 
-  const rows = data?.data.map((item) => {
+  const rows = data?.data?.map((item) => {
     return {
       name: <RowNameType2 label={item?.fullname} src={item?.userImage} />,
       accountNumber: item?.accountNumber,
