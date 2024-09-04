@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/SelectDate.jsx", "components/hooks/useDayHook.jsx"  ],
   "exclude": [
     "node_modules"
   ],

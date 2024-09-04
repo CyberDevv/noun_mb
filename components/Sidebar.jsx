@@ -45,7 +45,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="fixed w-full h-screen bg-white border-r-2 border-f2 max-w-[240px]">
+    <aside className="fixed w-full h-screen bg-white border-r-2 border-f2 max-w-[240px] overflow-y-auto">
       <Image
         src="/images/logo.png"
         width={519}
@@ -54,7 +54,7 @@ const Sidebar = () => {
         className="object-contain w-32 mx-auto my-12"
       />
 
-      <ul className="px-2.5">
+      <ul className="px-2.5 min-h-[700px]">
         <NavItem label="Dashboard" />
         <NavItem label="Account" />
         <NavItem label="Transactions" />

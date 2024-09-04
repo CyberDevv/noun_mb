@@ -2,7 +2,9 @@
 
 import AnalyticCard from "@/components/AnalyticCard";
 import useCheckAuth from "@/components/hooks/useCheckAuth";
+import { useDateRange } from "@/components/hooks/useDayHook";
 import { RowDate, RowStatus } from "@/components/RowFields";
+import SelectDate from "@/components/SelectDate";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
 import { Button } from "@/components/ui/button";
@@ -11,11 +13,13 @@ import Image from "next/image";
 import React from "react";
 
 const Account = () => {
+  const [day, setDay, date] = useDateRange();
+  
   const { data, isValidating } = useCheckAuth(
     `/api/transactions/getTransactions`
   );
 
-  const { data: dataStats } = useCheckAuth(`/api/transactions/getTransMetric`);
+  const { data: dataStats } = useCheckAuth(`/api/transactions/getTransMetricByDate?dateFrom=${date[1]}&dateTo=${date[0]}`);
 
   const dailyKey = Object?.keys(dataStats || []).find((key) =>
     key.startsWith("DAILY")
@@ -54,6 +58,7 @@ const Account = () => {
 
   return (
     <main className="space-y-[18px]">
+      <SelectDate hasFilter={[day, setDay]} />
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
         <AnalyticCard
           label="Daily Transactions"
