@@ -1,10 +1,11 @@
+"use client";
+
 import AnalyticCard from "@/components/AnalyticCard";
-import { RowDate, RowNameType2, RowStatus } from "@/components/RowFields";
+import { loansColumns } from "@/components/Columns";
+import { RowNameType2, RowStatus } from "@/components/RowFields";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
 import Tabs from "@/components/Tabs";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React from "react";
 
 const Account = () => {
@@ -18,35 +19,23 @@ const Account = () => {
               content: (
                 <>
                   <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px] border border-[#9FA3A947]">
-                    <AnalyticCard
-                      label="Total Applications"
-                      value={0}
-                      />
+                    <AnalyticCard label="Total Applications" value={0} />
                     <AnalyticCard label="Approved Loans" value={0} />
                     <AnalyticCard label="Pending Applications" value={0} />
                     <AnalyticCard label="Declined Applications" value={0} />
                   </div>
 
                   <Table
-                    columns={[
-                      "Name",
-                      "Account Number",
-                      "Repayment",
-                      "Loan Amount",
-                      "Repayment Amount",
-                      "Interest Rate",
-                      "Status",
-                      "Action",
-                    ]}
+                    columns={loansColumns}
                     rows={[
                       {
-                        name: <RowNameType2 label="Odesola Ibrahim" />,
+                        name: "Odesola Ibrahim",
                         acctNumber: "28377446362",
                         repayment: "03 June, 2024",
                         loanAmount: "₦ 589,473.00",
                         repaymentAmount: "₦ 589,473.00",
                         rate: "100%",
-                        status: <RowStatus label="Completed" />,
+                        status: "Completed",
                         action: "",
                       },
                     ]}
@@ -71,10 +60,7 @@ const Account = () => {
               content: (
                 <>
                   <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px] border border-[#9FA3A947]">
-                    <AnalyticCard
-                      label="Total Applications"
-                      value={0}
-                      />
+                    <AnalyticCard label="Total Applications" value={0} />
                     <AnalyticCard label="Approved Loans" value={0} />
                     <AnalyticCard label="Pending Applications" value={0} />
                     <AnalyticCard label="Declined Applications" value={0} />
@@ -124,10 +110,7 @@ const Account = () => {
               content: (
                 <>
                   <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px] border border-[#9FA3A947]">
-                    <AnalyticCard
-                      label="Total Applications"
-                      value={0}
-                      />
+                    <AnalyticCard label="Total Applications" value={0} />
                     <AnalyticCard label="Approved Loans" value={0} />
                     <AnalyticCard label="Pending Applications" value={0} />
                     <AnalyticCard label="Declined Applications" value={0} />

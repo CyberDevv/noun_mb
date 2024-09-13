@@ -33,16 +33,16 @@ const AnalyticCard = ({
         {amount ? (
           <>
             <p className="text-33 font-inter font-medium text-[24px] leading-[28px] mt-4">
-              {`₦${amount}`}
+              {`₦${amount?.toLocaleString('en-US')}`}
             </p>
 
             <p className="font-inter font-medium text-lg leading-[28px] mt-2 text-gray-600">
-              {valueIsCurrency ? `₦${value}` : value}
+              {valueIsCurrency ? `₦${value?.toLocaleString('en-US')}` : value?.toLocaleString('en-US')}
             </p>
           </>
         ) : (
           <p className="text-33 font-inter font-medium text-[24px] leading-[28px]  mt-4">
-            {valueIsCurrency ? `₦${value}` : value}
+            {valueIsCurrency ? `₦${value?.toLocaleString('en-US')}` : value?.toLocaleString('en-US')}
           </p>
         )}
       </div>

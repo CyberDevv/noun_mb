@@ -1,10 +1,9 @@
+"use client";
+
 import AnalyticCard from "@/components/AnalyticCard";
-import { RowDate, RowNameType2, RowStatus } from "@/components/RowFields";
+import { insuranceColumns } from "@/components/Columns";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import React from "react";
 
 const Insurance = () => {
   return (
@@ -17,19 +16,13 @@ const Insurance = () => {
       </div>
 
       <Table
-        columns={[
-          "Policyholder Name ",
-          "Policy Number",
-          "Policy Type",
-          "Status",
-          "Action",
-        ]}
+        columns={insuranceColumns}
         rows={[
           {
-            name: <RowNameType2 label="Odesola Ibrahim" />,
+            name: "Odesola Ibrahim",
             number: "INS-123456",
             type: "Life Insurance",
-            status: <RowStatus label="Active" />,
+            status: "Active",
             action: "",
           },
         ]}

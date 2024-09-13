@@ -1,5 +1,6 @@
 "use client";
 
+import { UserContext } from "@/components/hooks/UserContext";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,10 +9,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Layout = ({ children }) => {
+  const router = useRouter();
+
   const [open, setOpen] = React.useState(false);
+
+  const { user } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    if (user?.userId) router.push("/");
+  }, [router, user]);
 
   return (
     <main className="bg-[#068A50] h-screen w-screen from-06 to-02 bg-gradient-to-br">

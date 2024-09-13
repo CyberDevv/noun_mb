@@ -1,11 +1,10 @@
+"use client";
+
 import AnalyticCard from "@/components/AnalyticCard";
-import { RowDate, RowNameType2, RowStatus } from "@/components/RowFields";
+import { investmentColumns } from "@/components/Columns";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React from "react";
-
 
 const Investment = () => {
   return (
@@ -14,24 +13,17 @@ const Investment = () => {
         <AnalyticCard label="Total No. of Holders" value={0} />
         <AnalyticCard label="Total Active" value={0} />
         <AnalyticCard label="Total Matured" value={0} />
-         <AnalyticCard label="Terminated" value={0} />
-        
+        <AnalyticCard label="Terminated" value={0} />
       </div>
 
       <Table
-        columns={[
-          "Name ",
-          "Account Number",
-          "Investment Type",
-          "Status",
-          "Action",
-        ]}
+        columns={investmentColumns}
         rows={[
-            {
-            name: <RowNameType2 label="Odesola Ibrahim" />,
+          {
+            name: "Odesola Ibrahim",
             number: "123467890",
             type: "Mutual Fund",
-            status: <RowStatus label="Active" />,
+            status: "Active",
             action: "",
           },
         ]}

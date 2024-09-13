@@ -3,11 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
+import { UserContext } from "./hooks/UserContext";
 import { Button } from "./ui/button";
-import { destroyCookie } from "nookies";
 
 const Sidebar = () => {
   const pathName = usePathname();
+
+  const { logout } = React.useContext(UserContext);
 
   const NavItem = ({ label, link }) => {
     return (
@@ -71,7 +74,9 @@ const Sidebar = () => {
           <Link href="/login">
             <Button
               className="w-full text-sm text-white bg-red-700 hover:bg-red-800"
-              onClick={() => destroyCookie(null, "_token")}
+              onClick={() => {
+                logout();
+              }}
             >
               Logout
             </Button>

@@ -1,25 +1,29 @@
 "use client";
 
 import AnalyticCard from "@/components/AnalyticCard";
+import { TransColumns } from "@/components/Columns";
 import useCheckAuth from "@/components/hooks/useCheckAuth";
 import { useDateRange } from "@/components/hooks/useDayHook";
-import { RowDate, RowStatus } from "@/components/RowFields";
 import SelectDate from "@/components/SelectDate";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
-import { Button } from "@/components/ui/button";
-import moment from "moment";
-import Image from "next/image";
 import React from "react";
 
 const Account = () => {
   const [day, setDay, date] = useDateRange();
-  
+
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
   const { data, isValidating } = useCheckAuth(
-    `/api/transactions/getTransactions`
+    `/api/transactions/getTransactions?pageNumber=${pagination?.pageIndex}&pageSize=${pagination?.pageSize}`
   );
 
-  const { data: dataStats } = useCheckAuth(`/api/transactions/getTransMetricByDate?dateFrom=${date[1]}&dateTo=${date[0]}`);
+  const { data: dataStats } = useCheckAuth(
+    `/api/transactions/getTransMetricByDate?dateFrom=${date[1]}&dateTo=${date[0]}`
+  );
 
   const dailyKey = Object?.keys(dataStats || []).find((key) =>
     key.startsWith("DAILY")
@@ -31,27 +35,22 @@ const Account = () => {
     key.startsWith("MONTHLY")
   );
 
-  const rows = data?.data?.map((item) => {
+  const rows = data?.data?.map((item, index) => {
     return {
+      id: index,
       transId: item?.recId,
       acctNumber: item?.originatorAccountNumber,
       acctName: item?.originatorAccountName,
       bacctNumber: item?.beneficiaryAccountNumber,
       bacctName: item?.beneficiaryAccountName,
-      amount: `${
-        item?.transactionType?.toLowerCase() === "credit" ? "+" : "-"
-      }₦ ${item?.amount}`,
+      transactionType: item?.transactionType,
+      amount: item?.amount,
       desc:
         item?.referenceType.charAt(0).toUpperCase() +
         item?.referenceType.slice(1).toLowerCase(),
-      date: (
-        <RowDate
-          date={moment(item?.transactionDate).format("DD MMMM, YYYY")}
-          time={moment(item?.transactionDate).format("hh:mm A")}
-        />
-      ),
+      date: item?.transactionDate,
       ref: item?.reference,
-      status: <RowStatus label={item?.status} />,
+      status: item?.status,
       action: "",
     };
   });
@@ -78,21 +77,13 @@ const Account = () => {
       </div>
 
       <Table
-        columns={[
-          "Transaction ID ",
-          "Account No",
-          "Account Name",
-          "Beneficiary Account No",
-          "Beneficiary Account Name",
-          "Amount",
-          "Description",
-          "Date/Time",
-          "Reference No.",
-          "Status",
-          "Action",
-        ]}
+        columns={TransColumns}
         rows={rows || []}
         isValidating={isValidating}
+        pageCount={data?.totalPages}
+        pagination={pagination}
+        setPagination={setPagination}
+        totalRecords={data?.totalRecords}
         toolbar={
           <div className="between">
             <h6 className="font-medium text-black font-inter leading-[28px] tracking-[0.2px]">

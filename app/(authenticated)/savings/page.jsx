@@ -1,15 +1,9 @@
+"use client";
+
 import AnalyticCard from "@/components/AnalyticCard";
-import {
-  RowAmount,
-  RowDate,
-  RowNameType2,
-  RowStatus,
-  RowStatusType2,
-} from "@/components/RowFields";
+import { savingsColumns } from "@/components/Columns";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import React from "react";
 
 const Savings = () => {
@@ -24,34 +18,16 @@ const Savings = () => {
       </div>
 
       <Table
-        columns={[
-          "Name",
-          "Account Number",
-          "Package",
-          "Deposit Amount",
-          "Credited Amount",
-          "Interest Rate/Deposit Period",
-          "Status",
-        ]}
+        columns={savingsColumns}
         rows={[
           {
-            name: <RowNameType2 label="Odesola Ibrahim" />,
+            name: "Odesola Ibrahim",
             acctNumber: "28377446362",
             package: "Fixed Deposit",
-            depAmount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            crAmount: (
-              <RowAmount
-                label="-₦ 589,473.00"
-                date="03 June, 2024 | 09:43 AM"
-              />
-            ),
-            rate: <RowAmount label="2.5%" date="1 Year" />,
-            status: <RowStatusType2 label="Completed" />,
+            depAmount: "",
+            crAmount: "",
+            rate: "",
+            status: "Completed",
           },
         ]}
         toolbar={

@@ -15,8 +15,6 @@ const useCheckAuth = (url) => {
 
   useEffect(() => {
     if (data?.status === 401) {
-      localStorage.removeItem("user");
-      router.push("/login");
       logout();
     }
   }, [data, logout, router]);

@@ -1,3 +1,6 @@
+"use client";
+
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -6,9 +9,58 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable
+} from "@tanstack/react-table";
+import React from "react";
+import DataTablePagination from "./Pagination";
 
-const TableComp = ({ columns, rows, toolbar, isValidating }) => {
+const TableComp = ({
+  columns,
+  rows,
+  toolbar,
+  isValidating,
+  pageCount,
+  pagination,
+  setPagination,
+  totalRecords
+}) => {
+  const [sorting, setSorting] = React.useState([]);
+  const [columnFilters, setColumnFilters] = React.useState([]);
+  const [columnVisibility, setColumnVisibility] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState({});
+
+  React.useEffect(() => {
+    pagination && setPagination(pagination);
+  }, [pagination, setPagination]);
+
+  const table = useReactTable({
+    data: rows,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    pageCount,
+    manualPagination: true,
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+      pagination,
+    },
+    totalRecords: totalRecords
+  });
+
   return (
     <div className="bg-white rounded-[15px] p-5">
       {/* ToolBar */}
@@ -20,22 +72,27 @@ const TableComp = ({ columns, rows, toolbar, isValidating }) => {
         ) : (
           <Table className="relative w-full min-w-max">
             <TableHeader>
-              <TableRow className="bg-[#F2F2F2] h-[52px] border-y border-[#E0E0E0]">
-                {columns.map((col, idx) => {
-                  return (
-                    <TableHead
-                      className={`${
-                        col?.toLowerCase() === "status" ? "text-center" : ""
-                      }`}
-                      key={idx}
-                    >
-                      {col}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow
+                  className="bg-[#F2F2F2] h-[52px] border-y border-[#E0E0E0]"
+                  key={headerGroup.id}
+                >
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
             </TableHeader>
-            {rows.length === 0 ? (
+            {rows?.length === 0 ? (
               <div className="h-20">
                 <p className="absolute w-full text-center text-gray-500 top-24">
                   No data to display
@@ -43,28 +100,42 @@ const TableComp = ({ columns, rows, toolbar, isValidating }) => {
               </div>
             ) : (
               <TableBody>
-                {rows.map((rows, idx) => {
-                  return (
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
                     <TableRow
                       className="h-[55px] border-b border-[#EBF2FA] "
-                      key={idx}
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
                     >
-                      {Object.keys(rows).map((key, index) => (
+                      {row.getVisibleCells().map((cell) => (
                         <TableCell
-                          className={`text-33 font-inter leading-[16px] text-sm tracking-[0.2px]`}
-                          key={index}
+                          className={`text-33 font-inter leading-[16px] text-sm tracking-[0.2px] capitalize`}
+                          key={cell.id}
                         >
-                          {rows[key]}
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
                         </TableCell>
                       ))}
                     </TableRow>
-                  );
-                })}
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      No results.
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             )}
           </Table>
         )}
       </div>
+      {pagination && <DataTablePagination table={table} />}
     </div>
   );
 };

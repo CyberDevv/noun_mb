@@ -15,7 +15,7 @@ export async function GET(request) {
   const amountTo = searchParams.get("amountTo") || 0;
 
   const params = {
-   pageNumber,
+   pageNumber: Number(pageNumber) + 1,
    pageSize,
    querySearch,
    searchType,

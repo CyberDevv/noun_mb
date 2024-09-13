@@ -1,13 +1,8 @@
 "use client";
 
 import AnalyticCard from "@/components/AnalyticCard";
+import { accountsColumns } from "@/components/Columns";
 import useCheckAuth from "@/components/hooks/useCheckAuth";
-import {
-  RowAction,
-  RowNameType2,
-  RowStatusType2,
-  RowVerification,
-} from "@/components/RowFields";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
 import React from "react";
@@ -15,22 +10,27 @@ import React from "react";
 const Account = () => {
   const [tab, setTab] = React.useState("Total Accounts");
 
-  const { data, isValidating } = useCheckAuth(`/api/accounts/getAccounts`);
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const { data, isValidating } = useCheckAuth(
+    `/api/accounts/getAccounts?pageNumber=${pagination?.pageIndex}&pageSize=${pagination?.pageSize}`
+  );
   const { data: dataStats } = useCheckAuth(`/api/accounts/getStats`);
 
-  const rows = data?.data?.map((item) => {
+  const rows = data?.data?.map((item, index) => {
     return {
-      name: <RowNameType2 label={item?.fullname} src={item?.userImage} />,
-      accountNumber: item?.accountNumber,
-      tier: item?.accountType,
-      verification: (
-        <RowVerification
-          label={item?.verification === "true" ? "Approved" : "Unapproved"}
-        />
-      ),
+      id: index,
+      name: item?.fullname?.toLowerCase(),
+      src: item?.userImage,
+      acctNo: item?.accountNumber,
+      tier: item?.accountType?.toLowerCase(),
+      verification: item?.verification,
       phoneNumber: item?.telephone,
-      status: <RowStatusType2 label={item?.userStatus} />,
-      action: <RowAction />,
+      status: item?.userStatus,
+      action: "",
     };
   });
 
@@ -64,21 +64,17 @@ const Account = () => {
       </div>
 
       <Table
-        columns={[
-          "Account Holder Name ",
-          "Account Number",
-          "Tier",
-          "Verification",
-          "Phone Number",
-          "Status",
-          "Action",
-        ]}
+        columns={accountsColumns}
         rows={rows || []}
         isValidating={isValidating}
+        pageCount={data?.totalPages}
+        pagination={pagination}
+        setPagination={setPagination}
+        totalRecords={data?.totalRecords}
         toolbar={
           <div className="between">
             <h6 className="font-medium text-black font-inter leading-[28px] tracking-[0.2px]">
-                {`List of ${tab === "Total Accounts" ? "Accounts" : tab}`}
+              {`List of ${tab === "Total Accounts" ? "Accounts" : tab}`}
             </h6>
 
             <div className="space-x-10 end">

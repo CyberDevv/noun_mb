@@ -1,43 +1,37 @@
 "use client";
 
 import AnalyticCard from "@/components/AnalyticCard";
+import { recentTransColumns } from "@/components/Columns";
 import useCheckAuth from "@/components/hooks/useCheckAuth";
-import { RowAmount, RowName, RowStatus } from "@/components/RowFields";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
-import ViewAllButton from "@/components/table/ViewAllButton";
-import moment from "moment";
+import React from "react";
 
 export default function Page() {
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
   const { data: dataStats } = useCheckAuth(`/api/transactions/getTransMetric`);
 
   const { data: dataStatsAccount } = useCheckAuth(`/api/accounts/getStats`);
 
   const { data, isValidating } = useCheckAuth(
-    `/api/transactions/getTransactions`
+    `/api/transactions/getTransactions?pageNumber=${pagination?.pageIndex}&pageSize=${pagination?.pageSize}`
   );
 
-  const rows = data?.data?.map((item) => {
+  const rows = data?.data?.map((item, index) => {
     return {
-      name: (
-        <RowName
-          label={item?.beneficiaryAccountName}
-          naration={item?.transactionType?.toLowerCase()}
-        />
-      ),
-      acctNumber: item?.beneficiaryAccountNumber,
-      amount: (
-        <RowAmount
-          label={`${
-            item?.transactionType?.toLowerCase() === "credit" ? "+" : "-"
-          }₦ ${item?.amount}`}
-          date={`${moment(item?.transactionDate).format(
-            "DD MMMM, YYYY"
-          )} | ${moment(item?.transactionDate).format("hh:mm A")}`}
-        />
-      ),
-      status: <RowStatus label={item?.status} />,
-      action: "",
+      id: index,
+      name: item?.beneficiaryAccountName,
+      naration: item?.transactionType,
+      acctNo: item?.beneficiaryAccountNumber,
+      transactionType: item?.transactionType,
+      transactionDate: item?.transactionDate,
+      amount: item?.amount,
+      status: item?.status,
+      Invoice: "",
     };
   });
 
@@ -63,9 +57,13 @@ export default function Page() {
       </div>
 
       <Table
-        columns={["Name", "Account Number", "Amount", "Status", "Invoice"]}
+        columns={recentTransColumns}
         rows={rows || []}
         isValidating={isValidating}
+        pageCount={data?.totalPages}
+        pagination={pagination}
+        setPagination={setPagination}
+        totalRecords={data?.totalRecords}
         toolbar={
           <div className="between">
             <h6 className="font-medium text-black font-inter leading-[28px] tracking-[0.2px]">

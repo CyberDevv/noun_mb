@@ -1,12 +1,13 @@
+"use client";
+
 import AnalyticCard from "@/components/AnalyticCard";
-import { RowDate, RowName, RowStatusType2 } from "@/components/RowFields";
+import { cardsColumns } from "@/components/Columns";
 import Table from "@/components/Table";
 import SearchInput from "@/components/table/SearchInput";
 
 const Cards = () => {
   return (
     <main className="space-y-[18px]">
-      {" "}
       <div className="overflow-hidden divide-x-2 start divide-E0 rounded-[15px]">
         <AnalyticCard label="Total No. of Cards" value={0} />
         <AnalyticCard label="Total Active Cards" value={0} />
@@ -14,32 +15,18 @@ const Cards = () => {
         <AnalyticCard label="Blocked Cards" value={0} />
       </div>
       <Table
-        columns={[
-          "Name ",
-          "Account Number",
-          "Card No.",
-          "Card Type",
-          "Date Issued",
-          "Expiry Date",
-          "Status",
-          "Action",
-        ]}
+        columns={cardsColumns}
         rows={[
           {
-            name: (
-              <RowName
-                label="Odesola Ibrahim"
-                naration={
-                  <span className="text-[#515151]">abc@example.com</span>
-                }
-              />
-            ),
+            id: 1,
+            name: "Odesola Ibrahim",
+            naration: "abc@example.com",
             acctNumber: "28377446362",
             cardNo: "293xxxxxxxx9015",
             cardType: "Credit",
-            dateIssued: <RowDate date="03 June, 2024" time="09:43 AM" />,
-            expiryDate: <RowDate date="03 June, 2024" time="09:43 AM" />,
-            status: <RowStatusType2 label="Active" />,
+            dateIssued: "",
+            expiryDate: "",
+            status: "Active",
             action: "",
           },
         ]}
